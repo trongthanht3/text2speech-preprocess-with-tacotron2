@@ -4,8 +4,8 @@ import pysrt
 import pandas as pd
 from pydub import AudioSegment
 
-data_path = '/Users/trongthanht3/PycharmProjects/text2speech/data'
-
+#rename filename for vietnamese
+#sửa lại tên file để loại bỏ dấu câu với những file có tên tiếng việt
 def no_accent_vietnamese(s):
     s = s.lower()
     s = re.sub('[áàảãạăắằẳẵặâấầẩẫậ]', 'a', s)
@@ -25,7 +25,12 @@ def no_accent_vietnamese(s):
     s = re.sub('[ \b\t]', '_', s)
     return s
 
+#generate all your data to a csv
+#generate toàn bộ data và gom về 1 file csv có dạng:
+#   path_to_audio|<text content>
 
+#generate_csv will gen csv for 1 file only
+#hàm dưới chỉ gen csv cho 1 file
 def generate_csv(_audioname, _subname, _audiooutdir, _csvoutput):
     audio_name = _audioname     #'ma_bup_be.mp3'
     sub_name = _subname         #'ma_bup_be.srt'
@@ -57,8 +62,12 @@ def generate_csv(_audioname, _subname, _audiooutdir, _csvoutput):
             # Write to csv file
             fd.write('{}|{}\n'.format(audio_extract_name, text))
 
+#this function will append all csv to 1
+#hàm dưới sẽ gom hết các csv về 1 file lớn
+#nếu chỉ cần generate cho 1 file nhỏ lẻ, chỉ dùng hàm trên sau đó nối với nhau bằng pandas sẽ tốt hơn
+#hàm dưới để tự động hoá hơn với 1 khối dữ liệu lớn
 def generate_csv_dir(data_path, output_path):
-    print("the fuck bro!")
+    # print("the fuck bro!")
     for file in os.listdir(data_path):
         if (file[-3:] == 'wav'):
             print("Adding: ", file)
@@ -81,8 +90,18 @@ def generate_csv_dir(data_path, output_path):
             #     meta.to_csv(sep='|')
 
 
+#change path for your usage / đổi path dưới đây theo đúng đường dẫn trên máy
+
+#data directory: put all your data (sub, audio file) to this folder
+#đặt toàn bộ sub, audio tương ứng đã xử lý vào 1 folder,
+#thay đổi đường dẫn dưới tới folder đó
 data_path = '/Users/trongthanht3/PycharmProjects/text2speech/audio_source_demo'
+
+#output folder
+#folder để chứa data output
 output_path = '/Users/trongthanht3/PycharmProjects/text2speech/audios_demo'
+
+#gen csv cho toàn bộ dữ liệu
 generate_csv_dir(data_path, output_path)
 
 
