@@ -40,11 +40,21 @@ def no_accent_vietnamese(s):
     s = re.sub('Đ', 'D', s)
     s = re.sub('[ \b\t]', '_', s)
     return s
+#remove emoji from string
+def deEmojify(text):
+    regrex_pattern = re.compile(pattern = "["
+        u"\U0001F600-\U0001F64F"  # emoticons
+        u"\U0001F300-\U0001F5FF"  # symbols & pictographs
+        u"\U0001F680-\U0001F6FF"  # transport & map symbols
+        u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
+                           "]+", flags = re.UNICODE)
+    return regrex_pattern.sub(r'',text)
 
 #rename to make sure there's no space or special char in file name
 def file_rename(data_path):
     for file in os.listdir(data_path):
         new_name = no_accent_vietnamese(file)
+        new_name = deEmojify(new_name)
         print(new_name)
         os.rename(data_path+'/'+file, data_path+'/'+new_name)
 
