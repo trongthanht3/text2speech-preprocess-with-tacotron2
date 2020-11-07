@@ -2,7 +2,7 @@
 Text to speech with Tacotron 2  
 text_to_speech_HaPhuong.ipynb is outdated, please don't use!  
   
-## Tiền xử lý dữ liệu với data Tiếng Việt  
+## Tiền xử lý dữ liệu text2speech với data Tiếng Việt  
 ### 1. Cài đặt thư viện
 ```
 # git clone https://github.com/trongthanht3/text2speech-with-tacotron2
