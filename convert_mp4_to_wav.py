@@ -10,8 +10,8 @@ from pydub import AudioSegment
 
 #edit this path to correct data dir
 def convert_mp4_to_wav(_datapath, _audiopathout):
-    data_path = _datapath               #'/Users/trongthanht3/PycharmProjects/text2speech/datademo'
-    audio_path_out = _audiopathout      #'/Users/trongthanht3/PycharmProjects/text2speech/audio_source_demo'
+    data_path = _datapath
+    audio_path_out = _audiopathout
     sample_rate = '22050'
     channel = '1'
     for file in os.listdir(data_path):
@@ -26,7 +26,10 @@ def convert_mp4_to_wav(_datapath, _audiopathout):
             print("--------------------------")
     print("completed!")
 
-
+#change this path for your usage
+datapath = ""       #'/Users/trongthanht3/PycharmProjects/text2speech/datademo'
+output = ""         #'/Users/trongthanht3/PycharmProjects/text2speech/audio_source_demo'
+convert_mp4_to_wav(datapath, output)
 
 
 
