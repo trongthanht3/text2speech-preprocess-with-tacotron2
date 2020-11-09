@@ -8,7 +8,7 @@
 #
 #this download script go with convert_to_wav.py but this script sometimes error
 #so i make 2 script
-
+#---------------
 
 from pytube import YouTube
 from pytube import Playlist
@@ -26,6 +26,20 @@ def download_playlist(url, path_dir):
         print('download complete!')
         print("----------------------")
 
-url = 'https://www.youtube.com/playlist?list=PLfKmBpK2q_5NMtTiI_5hbH2dyCLhMfxcZ'
-path = '/Users/trongthanht3/PycharmProjects/text2speech/data'
-download_playlist(url, path)
+def download_playlist_video(_url, path_dir):
+    playlist = Playlist(_url)
+    #playlist._video_regex = re.compile(r"\"url\":\"(/watch\?v=[\w-]*)")
+    #prints each video url, which is the same as iterating through playlist.video_urls
+    for url in playlist:
+        print(url)
+        #only_audio=false mean we down both audio and video
+        YouTube(url).streams.filter(only_audio=False).first().download(path_dir)
+        print('download complete!')
+        print("----------------------")
+
+url = 'https://www.youtube.com/playlist?list=PLfKmBpK2q_5NaYBg_BI6-ccXJDjSWe7Zc'
+path = '/Users/thanh/WorkAca/ZaloTeam/data'
+download_playlist_video(url, path)
+# download_playlist(url, path)
+# pl = Playlist(url)
+# pl.download_all(path)
